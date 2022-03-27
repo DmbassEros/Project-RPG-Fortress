@@ -37,6 +37,7 @@ class Program
     }
     private static void ComprobarEntradaUsuario()
     {
+        // movimientos
         if (Hardware.TeclaPulsada(Hardware.TECLA_IZQ))
             x -= 3;
         if (Hardware.TeclaPulsada(Hardware.TECLA_DER))
