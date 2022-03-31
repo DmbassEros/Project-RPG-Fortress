@@ -6,7 +6,10 @@ class Program
 {
     static bool terminado;
     static Sprite personaje;
+    static Sprite enemigo;
     static int x, y;
+    static int xEmemy, yEmemy;
+    static int velocidadEnemigo;
     static void Main(string[] args)
     {
         InicializarJuego();
@@ -22,16 +25,23 @@ class Program
     private static void InicializarJuego()
     {
         Hardware.Inicializar(1280, 720, 24);
-        personaje = new Sprite("datos\\soldier.png");
+        personaje = new Sprite("assets\\personajes/soldier.png");
+        enemigo = new Sprite("assets\\enemigos/enemigo_soldier.png");
         terminado = false;
         x = 600;
         y = 300;
+        xEmemy = 200;
+        xEmemy = 250;
+        velocidadEnemigo = 5;
     }
     private static void DibujarPantalla()
     {
         Hardware.BorrarPantallaOculta();
         personaje.MoverA(x, y);
         personaje.Dibujar();
+
+        enemigo.MoverA(xEmemy, yEmemy);
+        enemigo.Dibujar();
 
         Hardware.VisualizarOculta();
     }
@@ -52,7 +62,7 @@ class Program
     }
     private static void AnimarElementos()
     {
-
+        xEmemy = velocidadEnemigo;
     }
     private static void PausarHastaFinDeFotograma()
     {
