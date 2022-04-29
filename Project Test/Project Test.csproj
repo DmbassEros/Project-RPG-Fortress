@@ -47,6 +47,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatosGlobales.cs" />
     <Compile Include="Fuente.cs" />
     <Compile Include="Hardware.cs" />
     <Compile Include="Imagen.cs" />

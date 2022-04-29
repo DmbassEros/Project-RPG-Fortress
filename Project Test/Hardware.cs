@@ -143,47 +143,9 @@ class Hardware
         System.Console.WriteLine(texto);
         Environment.Exit(1);
     }
-
-
-    // Definiciones de teclas
+    // Teclas a usar en el programa
     public static int TECLA_ESC = Sdl.SDLK_ESCAPE;
     public static int TECLA_ESP = Sdl.SDLK_SPACE;
-    public static int TECLA_A = Sdl.SDLK_a;
-    public static int TECLA_B = Sdl.SDLK_b;
-    public static int TECLA_C = Sdl.SDLK_c;
-    public static int TECLA_D = Sdl.SDLK_d;
-    public static int TECLA_E = Sdl.SDLK_e;
-    public static int TECLA_F = Sdl.SDLK_f;
-    public static int TECLA_G = Sdl.SDLK_g;
-    public static int TECLA_H = Sdl.SDLK_h;
-    public static int TECLA_I = Sdl.SDLK_i;
-    public static int TECLA_J = Sdl.SDLK_j;
-    public static int TECLA_K = Sdl.SDLK_k;
-    public static int TECLA_L = Sdl.SDLK_l;
-    public static int TECLA_M = Sdl.SDLK_m;
-    public static int TECLA_N = Sdl.SDLK_n;
-    public static int TECLA_O = Sdl.SDLK_o;
-    public static int TECLA_P = Sdl.SDLK_p;
-    public static int TECLA_Q = Sdl.SDLK_q;
-    public static int TECLA_R = Sdl.SDLK_r;
-    public static int TECLA_S = Sdl.SDLK_s;
-    public static int TECLA_T = Sdl.SDLK_t;
-    public static int TECLA_U = Sdl.SDLK_u;
-    public static int TECLA_V = Sdl.SDLK_v;
-    public static int TECLA_W = Sdl.SDLK_w;
-    public static int TECLA_X = Sdl.SDLK_x;
-    public static int TECLA_Y = Sdl.SDLK_y;
-    public static int TECLA_Z = Sdl.SDLK_z;
-    public static int TECLA_1 = Sdl.SDLK_1;
-    public static int TECLA_2 = Sdl.SDLK_2;
-    public static int TECLA_3 = Sdl.SDLK_3;
-    public static int TECLA_4 = Sdl.SDLK_4;
-    public static int TECLA_5 = Sdl.SDLK_5;
-    public static int TECLA_6 = Sdl.SDLK_6;
-    public static int TECLA_7 = Sdl.SDLK_7;
-    public static int TECLA_8 = Sdl.SDLK_8;
-    public static int TECLA_9 = Sdl.SDLK_9;
-    public static int TECLA_0 = Sdl.SDLK_0;
     public static int TECLA_ARR = Sdl.SDLK_UP;
     public static int TECLA_ABA = Sdl.SDLK_DOWN;
     public static int TECLA_DER = Sdl.SDLK_RIGHT;

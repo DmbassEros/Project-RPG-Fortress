@@ -14,7 +14,7 @@ class Sprite
     protected int xOriginal;  // Para llevar a su posicion inicial
     protected int yOriginal;
 
-    // La imagen que se mostrarß en pantalla, si es estatica
+    // La imagen que se mostrará en pantalla, si es estatica
     protected Imagen miImagen;
 
     // La secuencia de imagenes, si es animada
@@ -130,7 +130,7 @@ class Sprite
         Dibujar();
     }
 
-    /// Comprueba si ha chocado con otro elemento grßfico
+    /// Comprueba si ha chocado con otro elemento grafico
     public bool ColisionaCon(Sprite otroElem)
     {
         // No se debe chocar con un elemento oculto      
@@ -141,6 +141,21 @@ class Sprite
             && (otroElem.y + otroElem.alto > y)
             && (x + ancho > otroElem.x)
             && (y + alto > otroElem.y))
+            return true;
+        else
+            return false;
+    }
+
+    public bool ColisionaCon(int xIni, int yIni, int xFin, int yFin)
+    {
+        // No se debe chocar con un elemento oculto
+        if (activo == false)
+            return false;
+        // Ahora ya compruebo coordenadas
+        if ((x < xFin)
+            && (x + ancho > xIni)
+            && (y < yFin)
+            && (y + alto > yIni))
             return true;
         else
             return false;
