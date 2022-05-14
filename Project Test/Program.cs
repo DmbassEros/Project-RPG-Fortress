@@ -1,41 +1,62 @@
 ﻿using System;
 using System.Threading;
-using Tao.Sdl;
 
 class Program
 {
-    static bool terminado;
+    static bool sesionTerminada;
+    static bool partidaTerminada;
     static Sprite personaje;
     static Sprite[] items;
     static Sprite[] zonas;
     static int x, y;
-    static Fuente tipoDeLetra;
     static Sprite[,] paredes;
     static Sprite[,] fondo;
     static int xMapa = 1, yMapa = 1 ;
     static int anchoTile = 30, altoTile = 30;
-    static string texturaFondo;       
+    static string texturaFondo;
+
 
     static void Main(string[] args)
     {
-        InicializarJuego();
-        while (!terminado)
+        InicializarSesion();
+        do
         {
-            DibujarPantalla();
-            ComprobarEntradaUsuario();
-            AnimarElementos();
-            ComprobarEntradaUsuario();
-            ComprobarEstadoDelJuego();
-            PausarHastaFinDeFotograma();
+            if (!sesionTerminada)
+            {
+                InicializarJuego();
+                while (!partidaTerminada)
+                {
+                    DibujarPantalla();
+                    AnimarElementos();
+                    ComprobarEntradaUsuario();
+                    ComprobarEstadoDelJuego();
+                    PausarHastaFinDeFotograma();
+                }
+            }
         }
+        while (!sesionTerminada);
+    }
+    private static void InicializarSesion()
+    {
+        Hardware.Inicializar(1280, 720, 24);
+        sesionTerminada = false;
+        InicializarMenu();
+    }
+    private static void InicializarMenu()
+    {
+        Menu menu = new Menu();
+        menu.Start();
     }
     private static void InicializarJuego()
     {
-        Hardware.Inicializar(1280, 720, 24);
         personaje = new Sprite("assets\\personajes/down_soldier_2.png");
-        personaje.SetAnchoAlto(DatosGlobales.AnchoPersonaje, DatosGlobales.AltoPersonaje);
-        x = DatosGlobales.PosXPersonaje;
-        y = DatosGlobales.PosYPersonaje;
+        AnimarElementos();
+        DatosGlobales.SONIDOFONDO.ReproducirFondo();
+
+        personaje.SetAnchoAlto(DatosGlobales.ANCHOPERSONAJE,
+            DatosGlobales.ALTOPERSONAJE);
+        x = DatosGlobales.POSXPERSONAJE;
+        y = DatosGlobales.POSYPERSONAJE;
 
 
         items = new Sprite[DatosGlobales.cantidadItems];
@@ -43,30 +64,33 @@ class Program
         {
             items[i] = new Sprite("assets\\items/ammo.png");
             items[i].MoverA(
-                DatosGlobales.generador.Next(0, 650),
-                 DatosGlobales.generador.Next(0, 300));
-        items[i].SetAnchoAlto(DatosGlobales.AnchoyAltoItem, DatosGlobales.AnchoyAltoItem);
+                DatosGlobales.GENERADOR.Next(0, 650),
+                 DatosGlobales.GENERADOR.Next(0, 300));
+        items[i].SetAnchoAlto(DatosGlobales.ANCHOYALTOITEM,
+            DatosGlobales.ANCHOYALTOITEM);
         }
-        zonas = new Sprite[DatosGlobales.cantidadZonas];
-        for (int i = 0; i < DatosGlobales.cantidadZonas; i++)
+        zonas = new Sprite[DatosGlobales.CANTIDADZONAS];
+        for (int i = 0; i < DatosGlobales.CANTIDADZONAS; i++)
         {
-            zonas[i] = new Sprite("assets\\estructura/zona" + DatosGlobales.generador.Next(1, 4) + ".png");
+            zonas[i] = new Sprite("assets\\estructura/zona" +
+                DatosGlobales.GENERADOR.Next(1, 4) + ".png");
             zonas[i].MoverA(
-                DatosGlobales.generador.Next(250, 1100),
-                 DatosGlobales.generador.Next(300, 450));
-            zonas[i].SetAnchoAlto(DatosGlobales.AnchoyAltoZona, DatosGlobales.AnchoyAltoZona);
+                DatosGlobales.GENERADOR.Next(250, 1000),
+                 DatosGlobales.GENERADOR.Next(300, 450));
+            zonas[i].SetAnchoAlto(DatosGlobales.ANCHOYALTOZONA,
+                DatosGlobales.ANCHOYALTOZONA);
         }
-        terminado = false;
-        tipoDeLetra = new Fuente("assets\\fuentes/tf2build.ttf", 24);
+        partidaTerminada = false;
+
         
-        paredes = new Sprite[DatosGlobales.Mapa.Length,
-            DatosGlobales.Mapa[0].Length];
-        for (int fila = 0; fila < DatosGlobales.Mapa.Length; fila++)
+        paredes = new Sprite[DatosGlobales.MAPA.Length,
+            DatosGlobales.MAPA[0].Length];
+        for (int fila = 0; fila < DatosGlobales.MAPA.Length; fila++)
         {
             for (int columna = 0; columna < 
-                DatosGlobales.Mapa[0].Length;columna++)
+                DatosGlobales.MAPA[0].Length;columna++)
             {
-                if (DatosGlobales.Mapa[fila][columna] == '#')
+                if (DatosGlobales.MAPA[fila][columna] == '#')
                 {
                     paredes[fila, columna] = 
                         new Sprite("assets\\estructura/borde.png");
@@ -77,14 +101,14 @@ class Program
                 }
             }
         }
-        fondo = new Sprite[DatosGlobales.Mapa.Length,
-            DatosGlobales.Mapa[0].Length];
-        for (int fila = 0; fila < DatosGlobales.Mapa.Length; fila++)
+        fondo = new Sprite[DatosGlobales.MAPA.Length,
+            DatosGlobales.MAPA[0].Length];
+        for (int fila = 0; fila < DatosGlobales.MAPA.Length; fila++)
         {
             for (int columna = 0; columna <
-                DatosGlobales.Mapa[0].Length; columna++)
+                DatosGlobales.MAPA[0].Length; columna++)
             {
-                texturaFondo = DatosGlobales.Mapa[fila][columna].ToString();
+                texturaFondo = DatosGlobales.MAPA[fila][columna].ToString();
                 switch (texturaFondo)
                 {
                     case "-":
@@ -136,7 +160,7 @@ class Program
                         fondo[fila, columna].SetAnchoAlto(anchoTile, altoTile);
                         break;
                 }
-                if (DatosGlobales.Mapa[fila][columna] == '╗')
+                if (DatosGlobales.MAPA[fila][columna] == '╗')
                 {
                     fondo[fila, columna] =
                         new Sprite("assets\\estructura/camino2_2.png");
@@ -147,16 +171,17 @@ class Program
                 }
             }
         }
+
     }
     private static void DibujarPantalla()
     {
         Hardware.BorrarPantallaOculta();
        
         
-        for (int fila = 0; fila < DatosGlobales.Mapa.Length; fila++)
+        for (int fila = 0; fila < DatosGlobales.MAPA.Length; fila++)
         {
             for (int columna = 0; columna <
-                DatosGlobales.Mapa[0].Length; columna++)
+                DatosGlobales.MAPA[0].Length; columna++)
             {
                 if (paredes[fila,columna] != null)
                 {
@@ -164,10 +189,10 @@ class Program
                 }
             }
         }
-        for (int fila = 0; fila < DatosGlobales.Mapa.Length; fila++)
+        for (int fila = 0; fila < DatosGlobales.MAPA.Length; fila++)
         {
             for (int columna = 0; columna <
-                DatosGlobales.Mapa[0].Length; columna++)
+                DatosGlobales.MAPA[0].Length; columna++)
             {
                 if (fondo[fila, columna] != null)
                 {
@@ -175,7 +200,7 @@ class Program
                 }
             }
         }
-        for (int i = 0; i < DatosGlobales.cantidadZonas; i++)
+        for (int i = 0; i < DatosGlobales.CANTIDADZONAS; i++)
         {
             zonas[i].Dibujar();
         }
@@ -185,8 +210,10 @@ class Program
         }
         personaje.MoverA(x, y);
         personaje.Dibujar();
-        Hardware.EscribirTextoOculta("Equipo " + DatosGlobales.Score,
-            1100, 10, 255, 153, 51, tipoDeLetra);
+        Hardware.EscribirTextoOculta("Equipo " + DatosGlobales.SCORE,
+            1100, 10, 255, 153, 51, DatosGlobales.LETRA_MAIN);
+        Hardware.EscribirTextoOculta("solly", 1100, 35, 255, 153,
+            51, DatosGlobales.LETRA_MAIN);
         Hardware.VisualizarOculta();
     }
     private static void ComprobarEntradaUsuario()
@@ -194,34 +221,94 @@ class Program
         // Movimientos
         // Izquierda
         if ((Hardware.TeclaPulsada(Hardware.TECLA_IZQ))
-                && EsPosibleMoverA(x - DatosGlobales.velocidad, y,
-                x + DatosGlobales.AnchoPersonaje - DatosGlobales.velocidad,
-                y + DatosGlobales.AltoPersonaje))
-            x -= DatosGlobales.velocidad;
+                && EsPosibleMoverA(x - DatosGlobales.VELOCIDAD, y,
+                x + DatosGlobales.ANCHOPERSONAJE - DatosGlobales.VELOCIDAD,
+                y + DatosGlobales.ALTOPERSONAJE))
+        { 
+            x -= DatosGlobales.VELOCIDAD;
+            personaje.CambiarDireccion(Sprite.IZQUIERDA);
+            DatosGlobales.FOTOGRAMAS--;
+            if (DatosGlobales.FOTOGRAMAS <= 0)
+            {
+                DatosGlobales.FOTOGRAMAS = 5;
+                personaje.SiguienteFotograma();
+            }
+        }
         // Derecha
         if ((Hardware.TeclaPulsada(Hardware.TECLA_DER))
-                && EsPosibleMoverA(x + DatosGlobales.velocidad, y,
-                x + DatosGlobales.AnchoPersonaje + DatosGlobales.velocidad,
-                y + DatosGlobales.AltoPersonaje))
-            x += DatosGlobales.velocidad;
+                && EsPosibleMoverA(x + DatosGlobales.VELOCIDAD, y,
+                x + DatosGlobales.ANCHOPERSONAJE + DatosGlobales.VELOCIDAD,
+                y + DatosGlobales.ALTOPERSONAJE))
+        {
+            x += DatosGlobales.VELOCIDAD;
+            personaje.CambiarDireccion(Sprite.DERECHA);
+            DatosGlobales.FOTOGRAMAS--;
+            if (DatosGlobales.FOTOGRAMAS <= 0)
+            {
+                DatosGlobales.FOTOGRAMAS = 5;
+                personaje.SiguienteFotograma();
+            }
+        }
         // Arriba
         if ((Hardware.TeclaPulsada(Hardware.TECLA_ARR))
-             && EsPosibleMoverA(x, y - DatosGlobales.velocidad,
-             x + DatosGlobales.AnchoPersonaje,
-             y + DatosGlobales.AltoPersonaje - DatosGlobales.velocidad))
-            y -= DatosGlobales.velocidad;
+             && EsPosibleMoverA(x, y - DatosGlobales.VELOCIDAD,
+             x + DatosGlobales.ANCHOPERSONAJE,
+             y + DatosGlobales.ALTOPERSONAJE - DatosGlobales.VELOCIDAD))
+        {
+            y -= DatosGlobales.VELOCIDAD;
+            personaje.CambiarDireccion(Sprite.ARRIBA);
+            DatosGlobales.FOTOGRAMAS--;
+            if (DatosGlobales.FOTOGRAMAS <= 0)
+            {
+                DatosGlobales.FOTOGRAMAS = 5;
+                personaje.SiguienteFotograma();
+            }
+        }
         // Abajo
         if ((Hardware.TeclaPulsada(Hardware.TECLA_ABA))
-                && EsPosibleMoverA(x, y + DatosGlobales.velocidad,
-                x + DatosGlobales.AnchoPersonaje,
-                y + DatosGlobales.AltoPersonaje + DatosGlobales.velocidad))
-            y += DatosGlobales.velocidad;
+                && EsPosibleMoverA(x, y + DatosGlobales.VELOCIDAD,
+                x + DatosGlobales.ANCHOPERSONAJE,
+                y + DatosGlobales.ALTOPERSONAJE + DatosGlobales.VELOCIDAD))
+        {
+            y += DatosGlobales.VELOCIDAD;
+            personaje.CambiarDireccion(Sprite.ABAJO);
+            DatosGlobales.FOTOGRAMAS--;
+            if (DatosGlobales.FOTOGRAMAS <= 0)
+            {
+                DatosGlobales.FOTOGRAMAS = 5;
+                personaje.SiguienteFotograma();
+            }
+            
+        }
 
         if (Hardware.TeclaPulsada(Hardware.TECLA_ESC))
-            terminado = true;
+        {
+            Thread.Sleep(250);
+            Menu menuAcargar = new Menu();
+            menuAcargar.Start();
+        }
+
+
     }
     private static void AnimarElementos()
     {
+        personaje.CargarSecuencia(Sprite.DERECHA,
+            new string[] { "assets\\personajes/right_soldier_1.png"
+            , "assets\\personajes/right_soldier_2.png",
+                "assets\\personajes/right_soldier_3.png" });
+        personaje.CargarSecuencia(Sprite.IZQUIERDA,
+           new string[] { "assets\\personajes/left_soldier_1.png"
+            , "assets\\personajes/left_soldier_2.png",
+                "assets\\personajes/left_soldier_3.png" });
+        personaje.CargarSecuencia(Sprite.ARRIBA,
+           new string[] { "assets\\personajes/up_soldier_1.png"
+            , "assets\\personajes/up_soldier_2.png",
+                "assets\\personajes/up_soldier_3.png" });
+        personaje.CargarSecuencia(Sprite.ABAJO,
+           new string[] { "assets\\personajes/down_soldier_1.png"
+            , "assets\\personajes/down_soldier_2.png",
+                "assets\\personajes/down_soldier_3.png" });
+
     }
 
     private static void ComprobarEstadoDelJuego()
@@ -233,11 +320,18 @@ class Program
                 items[i].SetActivo(false);
             }
         }
-        for (int i = 0; i < DatosGlobales.cantidadZonas; i++)
+        for (int i = 0; i < DatosGlobales.CANTIDADZONAS; i++)
         {
             if (zonas[i].ColisionaCon(personaje))
             {
                 zonas[i].SetActivo(false);
+                DatosGlobales.SONIDOFONDO.Interrumpir();
+                Thread.Sleep(100);
+                DatosGlobales.SONIDOCOMBATE.ReproducirFondo();
+                Combate combateACargar = new Combate((DatosGlobales.TIPOCOMBATE)
+                    Enum.Parse(typeof(DatosGlobales.TIPOCOMBATE),i.ToString()));
+                combateACargar.Start();
+                
             }
         }
     }
@@ -249,9 +343,9 @@ class Program
     private static bool EsPosibleMoverA(
         int xIni, int yIni, int xFin, int yFin)
     {
-        for (int fila = 0; fila < DatosGlobales.Mapa.Length; fila++)
+        for (int fila = 0; fila < DatosGlobales.MAPA.Length; fila++)
         {
-            for (int columna = 0; columna < DatosGlobales.Mapa[0].Length; columna++)
+            for (int columna = 0; columna < DatosGlobales.MAPA[0].Length; columna++)
             {
                 if (paredes[fila, columna] != null)
                 {
@@ -263,4 +357,9 @@ class Program
         }
         return true;
     }
+    public static void TerminarPartida()
+    {
+        partidaTerminada = true;
+    }
+        
 }

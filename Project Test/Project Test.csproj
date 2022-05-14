@@ -47,13 +47,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BattleLog.cs" />
+    <Compile Include="Combate.cs" />
     <Compile Include="DatosGlobales.cs" />
+    <Compile Include="Estadisticas.cs" />
     <Compile Include="Fuente.cs" />
     <Compile Include="Hardware.cs" />
     <Compile Include="Imagen.cs" />
     <Compile Include="InfoTexto.cs" />
+    <Compile Include="Inventario.cs" />
+    <Compile Include="Menu.cs" />
+    <Compile Include="Personaje.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Arma.cs" />
+    <Compile Include="Skills.cs" />
+    <Compile Include="Sonido.cs" />
     <Compile Include="Sprite.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -31,8 +31,11 @@ class Hardware
         Sdl.SDL_SetClipRect(pantallaOculta, ref rect2);
 
         SdlTtf.TTF_Init();
-    }
 
+        if (SdlMixer.Mix_OpenAudio(22050,
+            unchecked(Sdl.AUDIO_S16LSB), 2, 1024) == -1)
+            ErrorFatal("No se ha podido inicializar el audio");
+    }
     /// Dibuja una imagen en pantalla oculta, en ciertas coordenadas
     public static void BorrarPantallaOculta()
     {
@@ -106,7 +109,6 @@ class Hardware
         }
         return fuente;
     }
-
     public static bool TeclaPulsada(int c)
     {
         bool pulsada = false;
@@ -144,10 +146,15 @@ class Hardware
         Environment.Exit(1);
     }
     // Teclas a usar en el programa
+    public static int TECLA_1 = Sdl.SDLK_1;
+    public static int TECLA_2 = Sdl.SDLK_2;
+    public static int TECLA_3 = Sdl.SDLK_3;
+    public static int TECLA_4 = Sdl.SDLK_4;
     public static int TECLA_ESC = Sdl.SDLK_ESCAPE;
     public static int TECLA_ESP = Sdl.SDLK_SPACE;
     public static int TECLA_ARR = Sdl.SDLK_UP;
     public static int TECLA_ABA = Sdl.SDLK_DOWN;
     public static int TECLA_DER = Sdl.SDLK_RIGHT;
     public static int TECLA_IZQ = Sdl.SDLK_LEFT;
+    public static int F1 = Sdl.SDLK_F1;
 }
