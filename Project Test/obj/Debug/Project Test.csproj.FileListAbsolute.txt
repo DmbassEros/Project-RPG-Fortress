@@ -1,0 +1,27 @@
+C:\Users\eros\Desktop\Project-RPG-Fortress\Project Test\obj\Debug\Project Test.csproj.AssemblyReference.cache
+C:\Users\eros\Desktop\Project-RPG-Fortress\Project Test\obj\Debug\Project Test.csproj.SuggestedBindingRedirects.cache
+C:\Users\eros\Desktop\Project-RPG-Fortress\Project Test\obj\Debug\Project Test.csproj.CoreCompileInputs.cache
+C:\Users\eros\Desktop\Project-RPG-Fortress\Project Test\bin\Debug\Project Test.exe.config
+C:\Users\eros\Desktop\Project-RPG-Fortress\Project Test\bin\Debug\Project Test.exe
+C:\Users\eros\Desktop\Project-RPG-Fortress\Project Test\bin\Debug\Project Test.pdb
+C:\Users\eros\Desktop\Project-RPG-Fortress\Project Test\obj\Debug\Project Test.csproj.CopyComplete
+C:\Users\eros\Desktop\Project-RPG-Fortress\Project Test\obj\Debug\Project Test.exe
+C:\Users\eros\Desktop\Project-RPG-Fortress\Project Test\obj\Debug\Project Test.pdb
+C:\Users\eros\Desktop\Project RPG FORTRESS\Project-RPG-Fortress\Project Test\bin\Debug\Project Test.exe.config
+C:\Users\eros\Desktop\Project RPG FORTRESS\Project-RPG-Fortress\Project Test\bin\Debug\Project Test.exe
+C:\Users\eros\Desktop\Project RPG FORTRESS\Project-RPG-Fortress\Project Test\bin\Debug\Project Test.pdb
+C:\Users\eros\Desktop\Project RPG FORTRESS\Project-RPG-Fortress\Project Test\obj\Debug\Project Test.csproj.AssemblyReference.cache
+C:\Users\eros\Desktop\Project RPG FORTRESS\Project-RPG-Fortress\Project Test\obj\Debug\Project Test.csproj.SuggestedBindingRedirects.cache
+C:\Users\eros\Desktop\Project RPG FORTRESS\Project-RPG-Fortress\Project Test\obj\Debug\Project Test.csproj.CoreCompileInputs.cache
+C:\Users\eros\Desktop\Project RPG FORTRESS\Project-RPG-Fortress\Project Test\obj\Debug\Project Test.csproj.CopyComplete
+C:\Users\eros\Desktop\Project RPG FORTRESS\Project-RPG-Fortress\Project Test\obj\Debug\Project Test.exe
+C:\Users\eros\Desktop\Project RPG FORTRESS\Project-RPG-Fortress\Project Test\obj\Debug\Project Test.pdb
+C:\Users\Faggit\Desktop\Project RPG FORTRESS\Project-RPG-Fortress\Project Test\bin\Debug\Project Test.exe.config
+C:\Users\Faggit\Desktop\Project RPG FORTRESS\Project-RPG-Fortress\Project Test\bin\Debug\Project Test.exe
+C:\Users\Faggit\Desktop\Project RPG FORTRESS\Project-RPG-Fortress\Project Test\bin\Debug\Project Test.pdb
+C:\Users\Faggit\Desktop\Project RPG FORTRESS\Project-RPG-Fortress\Project Test\obj\Debug\Project Test.csproj.AssemblyReference.cache
+C:\Users\Faggit\Desktop\Project RPG FORTRESS\Project-RPG-Fortress\Project Test\obj\Debug\Project Test.csproj.SuggestedBindingRedirects.cache
+C:\Users\Faggit\Desktop\Project RPG FORTRESS\Project-RPG-Fortress\Project Test\obj\Debug\Project Test.csproj.CoreCompileInputs.cache
+C:\Users\Faggit\Desktop\Project RPG FORTRESS\Project-RPG-Fortress\Project Test\obj\Debug\Project Test.csproj.CopyComplete
+C:\Users\Faggit\Desktop\Project RPG FORTRESS\Project-RPG-Fortress\Project Test\obj\Debug\Project Test.exe
+C:\Users\Faggit\Desktop\Project RPG FORTRESS\Project-RPG-Fortress\Project Test\obj\Debug\Project Test.pdb
